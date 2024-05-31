@@ -4,4 +4,4 @@ dotenv.config();
 
 const databaseConnection = mongoose.connect(process.env.DATABASE_CONNECTION)
                                    .then(()=> console.log("Database Is Connected successfully"))
-                                   .catch((err)=> console.log("Error :::>", err.stack))
+                                   .catch((err)=> console.log("Error :", err.stack))
