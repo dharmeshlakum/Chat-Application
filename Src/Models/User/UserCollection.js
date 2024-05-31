@@ -56,7 +56,6 @@ userCollectionSchema.pre("updateOne", async function (next) {
 
     try {
         const update = this.getUpdate();
-
         if (update.$set && update.$set.password) {
             const hashcode = await passwordHashing(update.$set.password);
             update.$set.password = hashcode;
