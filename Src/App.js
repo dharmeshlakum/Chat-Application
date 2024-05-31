@@ -17,6 +17,7 @@ const __fileName = fileURLToPath(import.meta.url);
 const __dirname = dirname(__fileName);
 const staticPath = join(__dirname, "../Public");
 const viewPath = join(__dirname, "../Views");
+const assetPath = join(__dirname, "../Assets");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -25,6 +26,7 @@ app.use(cors({
     methods: ["post", "put"]
 }));
 app.use("/Public", express.static(staticPath));
+app.use("/Assets", assetPath);
 app.set("view engine", "hbs");
 app.set("views", viewPath);
 
