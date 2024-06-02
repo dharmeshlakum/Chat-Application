@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Public/CSS/Form.css">
+    <title>Realtime chat application</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="inner-container login-form-container">
+            <div class="img-container"><img src="/Public/Images/form-hero-image.jpg" alt="her0-section"></div>
+            <div class="data-container">
+                <h2><p>👋</p>Welcome Back To Your StorySprite</h2>
+                <form action="/login" method="post" id="login-form">
+                    <label for="userInput">Email or username</label>
+                    <input 
+                        type="text" 
+                        name="userInput" 
+                        id="userInput"
+                        />
+                    <label for="login-password">Password</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="login-password"
+                        />
+                    <a href="/forget-password" id="forget-password">Forget Password?</a>
+                    <button type="submit">Sign In</button>
+                </form>
+                <div class="login-option">
+                    <div class="or-container">
+                        <span class="lines"></span>
+                        <span>Or continue with</span>
+                        <span class="lines"></span>
+                    </div>
+                    <button class="login-option-btn" type="button">
+                        <img src="/Public/Images/google-icon.png" alt="google-icon">
+                        <p>Sign in with Google</p>
+                    </button>
+                    <button class="login-option-btn" type="button">
+                        <img src="/Public/Images/facebook-icon.png" alt="facebook-icon">
+                        <p>Sign in with Facebook</p>
+                    </button>
+                </div>
+                <p class="direction">Don't have an account? <button type="button" id="direct-to-signup">Create Account!</button></p>
+            </div>
+        </div>
+        <div class="inner-container signup-form-container"  style="display: none;">
+            <div class="img-container"><img src="/Public/Images/form-hero-image.jpg" alt="her0-section"></div>
+            <div class="data-container">
+                <h2>Create A Free Account And Join Us</h2>
+                <form action="/signup" method="post" id="signup-form">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        id="username"
+                        />
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        name="fullName" 
+                        id="fullName"
+                        />
+                    <label for="emailAddress">Email Address</label>
+                    <input 
+                        type="email" 
+                        name="emailAddress" 
+                        id="emailAddress"
+                        />
+                    <label for="signup-password">Password</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="signup-password"
+                        />
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-check" checked>
+                        <label for="remember-check">Remember Me</label>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <p class="direction">Already have an account? <button type="button" id="direct-to-login">Login</button></p>
+            </div>
+        </div>
+    </div>
+    <script src="/Public/JS/Form.js"></script>
+</body>
+</html>

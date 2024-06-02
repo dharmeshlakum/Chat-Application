@@ -4,6 +4,8 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createServer } from "node:http";
 import { Server  } from "socket.io";
+import cookieParser from "cookie-parser";
+import { authenticationRouter } from "./Apis/Authenticatio/AuthenticationRouter";
 
 const app = express();
 const server = createServer(app);
@@ -19,10 +21,13 @@ const viewFilePath = join(__dirname, "../Views");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 app.set("view engine", "hbs");
 app.set("views", viewFilePath);
 app.use("/Public", express.static(staticFilePath));
 app.use("/Assets", express.static(imageFilePath));
+
+app.use(authenticationRouter);
 
 io.on("connection", (socket)=>{
     console.log("New user is connected with socketID :", socket.id);
