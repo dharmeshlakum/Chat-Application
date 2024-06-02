@@ -5,7 +5,7 @@ import { messageModel } from "../../Models/Messages/MessagesCollection.js";
 
 const chatRouter = express.Router();
 
-chatRouter.get("/", tokenValidationMW, async(req, res)=>{
+chatRouter.get("/chat", tokenValidationMW, async(req, res)=>{
 
     try {
         const { token } = req;
@@ -34,7 +34,7 @@ chatRouter.get("/", tokenValidationMW, async(req, res)=>{
     }
 });
 
-chatRouter.get("/message", tokenValidationMW, async(req, res)=>{
+chatRouter.get("/messages", tokenValidationMW, async(req, res)=>{
 
     try {
         const { token } = req;
@@ -59,7 +59,7 @@ chatRouter.get("/message", tokenValidationMW, async(req, res)=>{
             username: message.sender.username,
             message: message.message
         }));
-
+console.log(message);
         res.status(200).json({success: true, message})
         
     } catch (error) {

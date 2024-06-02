@@ -26,6 +26,11 @@ const userCollectionSchema = new mongoose.Schema({
         required: true
     },
 
+    profilePicture: {
+        type: String,
+        default: "default-profile-picture.jpg"
+    },
+
     bio: {
         type: String,
         default: ""

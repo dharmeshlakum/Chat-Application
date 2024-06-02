@@ -51,7 +51,8 @@ async function handleSubmit (event, url, redirectTo = null){
 
         if(!response.ok){
             const data = await response.json();
-            alert(data);
+            alert(data.error);
+            return;
         }
 
         if(redirectTo){
@@ -64,7 +65,7 @@ async function handleSubmit (event, url, redirectTo = null){
 }
 
 loginForm.addEventListener("submit", (Event)=>{
-    handleSubmit(Event, "/login", "/")
+    handleSubmit(Event, "/login", "/chat")
 });
 
 signupForm.addEventListener("submit", (Event)=>{

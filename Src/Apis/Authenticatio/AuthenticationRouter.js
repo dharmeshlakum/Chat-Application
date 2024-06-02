@@ -41,7 +41,7 @@ authenticationRouter.post("/login", loginValidationMW, async (req, res) => {
 
     try {
         const { user } = req;
-        const token = user.generateToken();
+        const token = await user.generateToken();
         const userAgent = req.headers["user-agent"];
         const login = new loginModel({
             userId: user._id,
@@ -53,7 +53,7 @@ authenticationRouter.post("/login", loginValidationMW, async (req, res) => {
         res.cookie("login", token, {
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.status(200).redirect("/")
+        res.status(200).redirect("/chat")
 
     } catch (error) {
         console.log(error);

@@ -35,6 +35,7 @@ const loginValidationMW = async (req, res, next) => {
             const validation = await passwordValidation(password, user.password);
             if (!validation) return res.status(401).json({ error: "Wrong password !" });
             req.user = user;
+            next();
         }
 
     } catch (error) {
