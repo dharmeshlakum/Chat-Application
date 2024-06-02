@@ -1,6 +1,6 @@
 import { tokenValidation } from "../Services/Token/TokenValidation.js";
 
-const tokenValudationMW = async (req, res, next) => {
+const tokenValidationMW = async (req, res, next) => {
 
     try {
         const token = req.cookies["login"];
@@ -19,4 +19,4 @@ const tokenValudationMW = async (req, res, next) => {
     }
 }
 
-export { tokenValidation }
+export { tokenValidationMW }

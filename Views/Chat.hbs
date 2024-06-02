@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Public/CSS/Chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Realtime Chat application</title>
 </head>
 <body>
-    
+    <div class="main-container">
+        <div class="friend-list">
+            <form action="#" id="search-friend">
+                <input type="text" id="searchFriendInput" placeholder="Search Friend...">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div id="friendList">
+                {{#each friends}}
+                    <div class="friend" data-username="{{this.username}}">{{this.username}}</div>
+                {{/each}}
+            </div>
+        </div>
+        <div id="chatPanelContainer">
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/Public/JS/Chat.js"></script>
 </body>
 </html>

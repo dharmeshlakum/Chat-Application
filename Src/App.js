@@ -5,7 +5,11 @@ import { fileURLToPath } from "url";
 import { createServer } from "node:http";
 import { Server  } from "socket.io";
 import cookieParser from "cookie-parser";
-import { authenticationRouter } from "./Apis/Authenticatio/AuthenticationRouter";
+import { authenticationRouter } from "./Apis/Authenticatio/AuthenticationRouter.js";
+import { tokenValidation, tokenValidation } from "./Services/Token/TokenValidation.js";
+import { userModel } from "./Models/Users/UserCollection.js";
+import { messageModel } from "./Models/Messages/MessagesCollection.js";
+import { chatRouter } from "./Apis/Chat/ChatRouter.js";
 
 const app = express();
 const server = createServer(app);
@@ -28,9 +32,81 @@ app.use("/Public", express.static(staticFilePath));
 app.use("/Assets", express.static(imageFilePath));
 
 app.use(authenticationRouter);
+app.use(chatRouter);
 
+const connectedUsers = new Map();
 io.on("connection", (socket)=>{
     console.log("New user is connected with socketID :", socket.id);
+
+    socket.prependAny("register", (username)=>{
+        connectedUsers.set(username, socket.id);
+        socket.username = username;
+    });
+
+    socket.on("message", async(data)=>{
+
+        try {
+            const token = await tokenValidation(data.token);
+            const sender = await userModel.findOne({_id: token.id});
+            const receiver = await userModel.findOne({username: data.to});
+
+            if(!receiver){
+                console.log("Receiver not found !");
+                return false
+            }
+
+            const message = new messageModel({
+                sender: sender._id,
+                receiver: receiver._id
+            });
+            await message.save();
+
+            // socket.emit("new Message", {
+            //     from: socket.username,
+            //     message: message.message
+            // });
+
+            const senderSocketId = connectedUsers.get(sender.username);
+            const receiverSocketId = connectedUsers.get(receiver.username);
+
+            if(senderSocketId){
+                io.to(senderSocketId).emit("new Message", {
+                    from: sender.username,
+                    message: message.message
+                });
+
+            }else{
+                console.log("User is not connected");
+            }
+
+        } catch (error) {
+            console.log("Error While fatching the message :", error.stack);
+        }
+    });
+
+    socket.on("search friend", async(data)=>{
+
+        try {
+            const friend = await userModel.findOne({username: data.query});
+
+            if(friend){
+                socket.emit("search friend ouput", { success: true, friend });
+
+            }else{
+                socket.emit("search friend ouput", { success: false })
+            }
+
+        } catch (error) {
+            console.log("error while searching friend :", error.stack);
+        }
+    });
+
+    socket.on("disconnect", ()=>{
+        if(socket.username){
+            console.log(`${socket.username} is disconnected !`);
+            connectedUsers.delete(socket.username);
+        }
+    });
 
 });
 
