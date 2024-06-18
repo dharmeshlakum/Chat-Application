@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
-import { passwordHashing } from "../../Services/Password/PasswordServices.js";
 import jwt from "jsonwebtoken";
+import { passwordHashingFN } from "../../Services/Password/PasswordServices.js";
 
 const userCollectionSchema = new mongoose.Schema({
 
     username: {
         type: String,
         required: true,
-        unique: true,
-        maxLength: 30
+        unique: true
     },
 
     emailAddress: {
@@ -28,7 +27,12 @@ const userCollectionSchema = new mongoose.Schema({
 
     profilePicture: {
         type: String,
-        default: "default-profile-picture.jpg"
+        default: "Defaul-user-pic.jpg"
+    },
+
+    coverPicture: {
+        type: String,
+        default: "Default-Cover-Picture.jpg"
     },
 
     bio: {
@@ -58,29 +62,44 @@ const userCollectionSchema = new mongoose.Schema({
 });
 
 userCollectionSchema.pre("save", async function (next) {
-    const hashcode = await passwordHashing(this.password);
-    this.password = hashcode;
-    next()
+
+    try {
+        const hashcode = await passwordHashingFN(this.password);
+        this.password = hashcode;
+        next();
+
+    } catch (error) {
+        console.log("Mongoose Password hashing error -->", error);
+        next(error);
+    }
 });
 
 userCollectionSchema.pre("updateOne", async function (next) {
+
     try {
         const update = this.getUpdate();
-
         if (update.$set && update.$set.password) {
-            const hashcode = await passwordHashing(update.$set.password);
+            const hashcode = await passwordHashingFN(update.$set.password);
             update.$set.password = hashcode;
             next();
         }
 
     } catch (error) {
+        console.log("Mongoose password update error -->", error);
         next(error);
     }
 });
 
 userCollectionSchema.methods.generateToken = async function () {
-    const token = await jwt.sign({ id: this._id }, process.env.SECRET_KEY, { expiresIn: "1d" });
-    return token
+
+    try {
+        const token = await jwt.sign({ id: this._id }, process.env.TOKEN_SECRET, { expiresIn: "2d" })
+        return token;
+
+    } catch (error) {
+        console.log("Error while generating token -->", error);
+        return error;
+    }
 }
 
 const userModel = mongoose.model("Users", userCollectionSchema);

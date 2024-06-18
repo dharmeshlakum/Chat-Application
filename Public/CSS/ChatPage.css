@@ -1,0 +1,480 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
+  }
+  
+  body {
+    height: 100vh;
+    width: 100%;
+    background-image: #fff;
+    color: black;
+    font-size: 12px;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  .main-container {
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    color: inherit;
+    display: flex;
+    position: relative;
+  }
+  
+  .side-panel-container {
+    height: 100%;
+    width: 55px;
+    color: #ffff;
+    background: rgb(80, 77, 77);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+  }
+  
+  #back-btn{
+    background: transparent;
+    padding: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    outline: none;
+    font-size: 22px;
+    position: absolute;
+    z-index: 100;
+    top: 10px;
+    outline: none;
+    border: none;
+  }
+
+  .panel-img-container {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    border: 1px solid #fff;
+  }
+  
+  .panel-img-container a {
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .panel-img-container a img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .panel-img-container span {
+    position: absolute;
+    background: rgba(79, 61, 61, 0.614);
+    padding: 10px;
+    left: 47px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  
+  .panel-img-container:hover span {
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  .friend-list-container {
+    height: 100%;
+    width: 300px;
+    margin-right: 1px;
+    border-right: 1px solid #123452;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .search-form {
+    height: 47px;
+    width: 100%;
+    padding: 0 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-form input {
+    height: 80%;
+    padding: 0 10px;
+    font-size: 12px;
+    flex: 1;
+    background: #25476463;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 25px 0 0 25px;
+    border-right: none;
+  }
+  
+  .search-form button {
+    padding: 0 10px;
+    height: 80%;
+    outline: none;
+    border: 1px solid black;
+    border-left: none;
+    cursor: pointer;
+    background: #25476463;
+    transition: 0.5s linear;
+    border-radius: 0 25px 25px 0;
+  }
+  
+  .search-form button:hover {
+    color: #22629a;
+  }
+  
+  /* ! Group Create Div Styling ! */
+  
+  .create-group {
+    height: 40px;
+    width: 90%;
+    margin: 5px 0 20px;
+    background: #ffff;
+    align-self: center;
+    position: relative;
+  }
+  
+  .create-group button {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-weight: bold;
+  }
+  
+  .form-for-group {
+    height: 300px;
+    width: 100%;
+    background: #ffff;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    position: absolute;
+    top: -307px;
+    transition: 1s ease-in-out;
+  }
+  
+  #group-create-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  #group-image-icon {
+    height: 90px;
+    width: 90px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid black;
+  }
+  
+  #groupImage {
+    display: none;
+  }
+  
+  #groupName {
+    height: 40px !important;
+    width: 100%;
+    padding: 0 10px;
+    outline: none;
+    font-size: 12px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+  
+  #groupAbout {
+    flex: 1;
+    width: 100%;
+    font-size: 12px;
+    margin: 10px 0;
+    outline: none;
+    resize: none;
+    border-radius: 10px;
+    padding: 2px 10px;
+  }
+  
+  #group-create-btn {
+    height: 30px;
+    width: 100px;
+    outline: none;
+    background: #22e011;
+    color: #fff;
+  }
+  
+  #group-image-icon img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  #username-message {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: underline;
+  }
+  
+  .form-for-group form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+  }
+  
+  /* ! Friend List Container Styling ! */
+  .all-friends-list {
+    width: 100%;
+    flex: 1;
+    padding: 0 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    margin-bottom: 10px;
+  }
+  
+  .friend {
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    position: relative;
+    border-bottom: 1px solid #000000;
+  }
+  
+  .friend img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+  
+  .friend p {
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #272626;
+  }
+  
+  #add-btn, #join-group {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0000;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 1s linear;
+  }
+  
+  #join-group{
+    font-size: 12px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding:5px 10px;
+  }
+  
+  #join-group:hover{
+    background: #22629a;
+    color: #fff;
+  }
+  
+  #add-btn:hover {
+    color: hotpink;
+  }
+  
+  .No-Match{
+    text-align: center;
+    color: #123452;
+  }
+
+  /* ! Messages Panel Container ! */
+  
+  .chat-pannel-container {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      padding: 0 10px 10px;
+      flex-direction: column;
+    }
+    
+    .chat-panel{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .friend-data {
+      height: 60px;
+      width: 100%;
+      position: relative;
+      background: #282c35;
+      color: #ffff;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+    
+    .friend-data img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+    
+    .friend-data a {
+      margin-left: 10px;
+      font-size: 15px;
+      color: #fff;
+      font-weight: bold;
+    }
+    
+    .friend-data i {
+      color: gray;
+      position: absolute;
+      right: 20px;
+      font-size: 12px;
+    }
+  
+  .online {
+    color: #22e011 !important;
+    font-size: 15px !important;
+  }
+  
+  .messages {
+    flex: 1;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: flex;
+    position: relative;
+    padding: 10px;
+    flex-direction: column;
+    scrollbar-width: none;
+  }
+  
+  .message-body {
+    padding: 10px;
+    width: 300px;
+    position: relative;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    height: auto;
+    background: #d6dae1;
+    flex-direction: column;
+    
+  }
+
+  #msg-text{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .me {
+    background: #bdf6bc !important;
+    align-self: flex-end;
+  }
+  
+  .message-body p {
+    font-size: 12px;
+    color: #000000;
+  }
+  
+  .message-body span {
+    margin-top: 10px;
+    text-align: end;
+    text-decoration: underline;
+  }
+  
+  .message-body i {
+    color: rgb(0, 68, 255);
+  }
+  
+  #user-message-name {
+    text-decoration: underline;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .msg-delivery {
+    display: none;
+  }
+  
+  .chat-pannel-container form {
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+    overflow: hidden;
+    display: flex;
+    border-radius: 25px;
+    background: #00000079;
+  }
+  
+  .chat-pannel-container form input {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    padding: 0 10px;
+    border: none;
+    color: #ffff;
+  }
+  
+  .chat-pannel-container form input::placeholder {
+    color: #ffffff;
+  }
+  
+  .chat-pannel-container form button {
+    height: 100%;
+    width: 50px;
+    cursor: pointer;
+    border: none;
+    background: #078035;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .delete-msg-btn {
+    position: absolute;
+    padding: 5px;
+    background: transparent;
+    outline: none;
+    border: none;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-msg-btn i {
+    color: #282c35;
+    transition: 1s ease-in-out;
+  }
+  
+  .delete-msg-btn:hover i{
+      color: crimson;
+  }

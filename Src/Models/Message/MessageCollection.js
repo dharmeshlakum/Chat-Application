@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const messagesCollectionSchema = new mongoose.Schema({
+const messageCollectionSchema = new mongoose.Schema({
 
     sender: {
         type: mongoose.Schema.Types.ObjectId,
@@ -10,8 +10,12 @@ const messagesCollectionSchema = new mongoose.Schema({
 
     receiver: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
-        required: true
+        ref: "Users"
+    },
+
+    group: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Groups"
     },
 
     message: {
@@ -19,11 +23,16 @@ const messagesCollectionSchema = new mongoose.Schema({
         required: true
     },
 
-    timestamp: {
+    seen: {
+        type: Boolean,
+        default: false
+    },
+
+    time: {
         type: Date,
         default: () => Date.now()
     }
 });
 
-const messageModel = mongoose.model("Messages", messagesCollectionSchema);
+const messageModel = mongoose.model("Messages", messageCollectionSchema);
 export { messageModel }

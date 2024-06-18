@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/Public/CSS/UserPage.css">
+    <title>{{user.fullName}}</title>
+</head>
+<body>
+    <div class="profile-header">
+            <a href="/download/image/{{user.image}}" class="download-icon">
+                <i class="fa-solid fa-download"></i>
+            </a>
+            <a href="/user/image/{{user.image}}"><img src="/Assets/Profile/{{user.image}}" alt="Profile Picture" class="profile-picture"> </a>
+    </div>
+    <div class="profile-info">
+            <h1>{{user.name}}</h1>
+            <p><i class="fa-solid fa-user"></i> {{user.username}} | <i class="fa-solid fa-envelope"></i> {{user.emailAddress}}</p>
+            <p>{{user.about}}</p>
+            <p><i class="fa-solid fa-arrows-to-dot"></i> {{user.friends}} Friends | <i class="fa-solid fa-arrows-to-dot"></i> {{user.groups}} groups</p>
+            <div class="profile-actions">
+                <a href="/home">Back To Chat</a>
+            </div>
+    </div>
+    <div class="skills">
+            <h2>My Friends</h2>
+            <ul class="friend-list">
+                {{#each friends}}
+                    <li>
+                        <a href="/user/{{this.username}}">
+                            <img src="/Assets/Profile/{{this.image}}">
+                            <span>{{this.fullName}}</span>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+    </div>
+    <div class="skills">
+            <h2>Groups</h2>
+            <ul class="friend-list">
+                {{#each groups}}
+                    <li>
+                        <a href="/group/{{this.name}}">
+                            <img src="/Assets/Profile/{{this.image}}" alt="Friend 1">
+                            <span>{{this.name}}</span>
+                            <p>[ {{this.role}} ]</p>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+    </div>
+    {{#if login}}
+        <div class="settings-logout">
+            <a href="/user/{{user.username}}/edit-profile">Edit Profile</a>
+            <a href="/logout">Logout</a>
+            <a>Delete Account</a>
+        </div>
+    {{else}}
+        <div class="settings-logout">
+            <a href="#">Add To Friend</a>
+        </div>
+    {{/if}}
+</body>
+</html>

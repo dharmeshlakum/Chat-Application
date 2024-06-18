@@ -35,7 +35,7 @@ loginDirectionBTN.addEventListener("click", () => {
     }, 1000);
 });
 
-async function handleSubmit (event, url, redirectTo = null){
+async function handleSubmit(event, url, redirectTo = null) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formObject = Object.fromEntries(formData.entries());
@@ -49,25 +49,25 @@ async function handleSubmit (event, url, redirectTo = null){
             body: JSON.stringify(formObject)
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             const data = await response.json();
             alert(data.error);
             return;
         }
 
-        if(redirectTo){
+        if (redirectTo) {
             window.location.href = redirectTo
         }
-        
+
     } catch (error) {
         alert(error)
     }
 }
 
-loginForm.addEventListener("submit", (Event)=>{
-    handleSubmit(Event, "/login", "/chat")
+loginForm.addEventListener("submit", (Event) => {
+    handleSubmit(Event, "/login", "/home")
 });
 
-signupForm.addEventListener("submit", (Event)=>{
+signupForm.addEventListener("submit", (Event) => {
     handleSubmit(Event, "/signup", "/login")
 })

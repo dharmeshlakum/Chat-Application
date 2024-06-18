@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family:'Times New Roman', Times, serif;
+    margin: 0;
+    font-size: 12px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.profile-header {
+    background-image: url('/Assets/Covers/profile-cover-picture.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    position: relative;
+}
+.download-icon{
+    padding: 20px;
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffff;
+    font-size: 16px;
+    top: 249px;
+    left: 199px;
+    border: 1px solid black;
+    z-index: 1000;
+    position: absolute;
+}
+.profile-picture {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    position: absolute;
+    bottom: -125px;
+    left: 20px;
+    border: 2px solid black;
+}
+.profile-info {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 130px 20px 20px;
+    border-radius: 10px;
+    position: relative;
+}
+.profile-info h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.profile-info p {
+    margin: 5px 0;
+    color: #777;
+}
+.profile-actions {
+    margin-top: 10px;
+}
+.profile-actions a {
+    background-color: #0073b1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+.profile-actions a:hover {
+    background-color: #005582;
+}
+.skills {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px;
+    border-radius: 10px;
+}
+.skills h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+.friend-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.friend-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+.friend-list a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-align: center;
+}
+.friend-list img {
+    width: 180px;
+    height: 190px;
+    border-radius: 20%;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease;
+}
+.friend-list img:hover {
+    transform: scale(1.1);
+}
+.friend-list span {
+    font-size: 14px;
+    font-weight: bolder;
+    margin-top: 10px;
+    width: 180px;
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333;
+}
+.settings-logout {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.settings-logout a {
+    background-color: #0073b1;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+}
+.settings-logout a:hover {
+    background-color: #005582;
+}

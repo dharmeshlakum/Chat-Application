@@ -1,46 +1,49 @@
-import { userModel } from "../Models/Users/UserCollection.js";
-import { loginModel } from "../Models/Login/LoginCollection.js"
-import { passwordValidation } from "../Services/Password/PasswordServices.js";
+import { loginModel } from "../Models/Login/LoginCollection.js";
+import { userModel } from "../Models/User/UserCollection.js";
+import { passwordValidationFN } from "../Services/Password/PasswordServices.js";
 
 const loginValidationMW = async (req, res, next) => {
 
     try {
         const { userInput, password } = req.body;
-        if (!userInput || !password) return res.status(400).json({ error: "All fields are required !" });
+        if (!userInput || !password) return res.status(400).json({ error: "All filds are required !" });
 
         const user = await userModel.findOne({
             $or: [
-                { emailAddress: userInput },
-                { username: userInput }
-            ]
+                { username: userInput },
+                { emailAddress: userInput }
+            ],
+            isDeleted: false
         });
-        if (!user) return res.status(404).json({ error: "User not found !" });
+        if (!user) return res.status(400).json({ error: "Invalid username | email address" });
 
-        const loginData = await loginModel.findOne({ userId: user._id });
-        if (loginData) {
+        const validation = await passwordValidationFN(password, user.password);
+        const login = await loginModel.findOne({ userId: user._id });
 
-            if (loginData.userAgent === req.headers["user-agent"]) {
+        if (login) {
+            if (req.headers["user-agent"] === login.userAgent) {
                 const token = await user.generateToken();
-                await loginModel.updateOne({ userId: user._id }, {
+                loginModel.updateOne({ _id: login._id }, {
                     $set: { token }
                 });
-                res.cookie("login", token, {
-                    maxAge: 24 * 60 * 60 * 1000
-                });
-                res.status(200).redirect("/")
 
-            } else return res.status(409).json({ error: "User is already login on other device..." })
+                res.cookie("Login", token, {
+                    maxAge: 2 * 24 * 60 * 60 * 1000
+                });
+                res.status(200).redirect("/home")
+
+            } else return res.status(409).json({ error: "User is already login on other device !" });
 
         } else {
-            const validation = await passwordValidation(password, user.password);
-            if (!validation) return res.status(401).json({ error: "Wrong password !" });
             req.user = user;
             next();
         }
 
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error.message });
+        console.log("login middleware error -->",error);
+        res.status(500).json({
+            error: error.message
+        });
     }
 }
 

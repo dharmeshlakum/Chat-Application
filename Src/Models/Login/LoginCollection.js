@@ -5,12 +5,6 @@ const loginCollectionSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-        required: true,
-        unique: true
-    },
-
-    token: {
-        type: String,
         required: true
     },
 
@@ -19,12 +13,14 @@ const loginCollectionSchema = new mongoose.Schema({
         required: true
     },
 
+    token: {
+        type: String,
+        required: true
+    },
+
     loginAt: {
         type: Date,
-        default: () => Date.now(),
-        index: {
-            expireAfterSeconds: 24 * 60 * 60
-        }
+        default: () => Date.now()
     }
 });
 

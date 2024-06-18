@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/Public/CSS/EditProfile.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <form id="edit-profile-form" data-id="{{user.id}}" enctype="multipart/form-data">
+                <h2>Edit Profile</h2>
+                <div class="profile-pic">
+                    <img src="/Assets/Profile/{{user.image}}" alt="Profile Picture">
+                    <input type="file" id="profile-pic-upload" name="groupImage">
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="{{user.name}}">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="{{user.username}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="emailAddress" placeholder="{{user.emailAddress}}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Bio</label>
+                    <textarea name="bio" id="bio" placeholder="{{user.bio}}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" id="old-password" name="oldPassword" placeholder="*********">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="new-password" name="newPassword" placeholder="*********">
+                </div>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+        <div class="sidebar">
+            <h2>My Friend</h2>
+            {{#each friends}}
+                <div class="user-card" data-friendId = {{this.id}}>
+                    <img src="/Assets/Profile/{{this.image}}">
+                    <div class="user-info">
+                        <h3>{{this.fullName}}</h3>
+                    </div>
+                    <button class="remove-btn">X</button>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <script src="/Public/JS/EditProfile.js"></script>
+</body>
+</html>

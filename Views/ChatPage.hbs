@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/Public/CSS/ChatPage.css">
+    <title>{{user.fullName}}</title>
+</head>
+<body>
+    <div class="main-container">
+        {{!-- ! Side panel structure !--}}
+        <div class="side-panel-container">
+            <button id="back-btn"><i class="fa-solid fa-left-long"></i></button>
+            <div class="panel-img-container">
+                <a href="/user/{{user.username}}"><img src="/Assets/Profile/{{user.profilePicture}}" alt=""></a>
+                <span id="username-span" data-username = {{user.username}}>{{user.fullName}}</span>
+            </div>
+        </div>
+        {{!-- ! Friend list !--}}
+        <div class="friend-list-container">
+            <form action="#" id="search-friend" class="search-form">
+                <input 
+                    type="text"
+                    name="searchInput"
+                    id="search-friend-input"
+                    placeholder="Search Friend"
+                />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div id="friends-list" class="all-friends-list">
+                {{#each mixArray}}
+                    <div class="friend" data-fullName="{{this.fullName}}" data-image = "{{this.image}}" data-username = "{{this.name}}" data-id= "{{this.id}}">
+                    <img src="/Assets/Profile/{{this.image}}" alt="">
+                    <p>{{this.fullName}}</p>
+                    {{!-- <button type="button" id="add-btn"><i class="fa-solid fa-plus"></i></button> --}}
+                </div>
+                {{/each}}
+            </div>
+            <div class="create-group">
+                <div class="form-for-group" style="display: none;">
+                    <form action="/create-group" method="post" id="group-create-form" enctype="multipart/form-data">
+                        <label for="groupImage" id="group-image-icon"><img src="/Assets/Profile/Default-Group-image.jpg" alt="" id="group-img-icon"></label>
+                        <input type="file" name="groupImage" id="groupImage">
+                        <input type="text" name="groupName" id="groupName" placeholder="Group Name" required>
+                        <textarea placeholder="Description..." name="groupAbout" id="groupAbout"></textarea>
+                        <button type="submit" id="group-create-btn">Create</button>
+                    </form>
+                </div>
+                <button type="button" id="create-group-btn">Create New Group</button>
+            </div>
+        </div>
+        {{!-- ! Chat panel structure !--}}
+        <div class="chat-pannel-container">
+            
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/Public/JS/ClientSideSocket.js"></script>
+    <script src="/Public/JS/GroupCreation.js"></script>
+</body>
+</html>

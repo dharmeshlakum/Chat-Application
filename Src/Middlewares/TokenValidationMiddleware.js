@@ -1,12 +1,12 @@
-import { tokenValidation } from "../Services/Token/TokenValidation.js";
+import { tokenValidationFN } from "../Services/Token/TokenValidation.js";
 
 const tokenValidationMW = async (req, res, next) => {
 
     try {
-        const token = req.cookies["login"];
+        const token = req.cookies["Login"]
         if (!token) return res.status(401).redirect("/login");
 
-        const validation = await tokenValidation(token);
+        const validation = await tokenValidationFN(token);
         if (validation.exp * 1000 > Date.now()) {
             req.token = validation.id;
             next();
@@ -14,8 +14,8 @@ const tokenValidationMW = async (req, res, next) => {
         } else return res.status(401).redirect("/login")
 
     } catch (error) {
-        console.log(error);
-        res.status(401).redirect("/login");
+        console.log("Token validation middleware error -->", error);
+        res.status(401).redirect("/login")
     }
 }
 

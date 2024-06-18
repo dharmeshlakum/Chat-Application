@@ -1,14 +1,28 @@
 import bcrypt from "bcrypt";
 
-async function passwordHashing(password) {
-    const salt = await bcrypt.genSalt(10);
-    const hashcode = await bcrypt.hash(password, salt);
-    return hashcode
+async function passwordHashingFN(password) {
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashcode = await bcrypt.hash(password, salt);
+        return hashcode;
+
+    } catch (error) {
+        console.log("Password hashing error -->", error);
+        return error
+    }
 }
 
-async function passwordValidation(password, hashcode) {
-    const validation = await bcrypt.compare(password, hashcode);
-    return validation;
+async function passwordValidationFN(password, hashcode) {
+
+    try {
+        const validation = await bcrypt.compare(password, hashcode);
+        return validation;
+
+    } catch (error) {
+        console.log("Password validation error -->", error);
+        return error;
+    }
 }
 
-export { passwordHashing, passwordValidation }
+export { passwordHashingFN, passwordValidationFN }

@@ -1,8 +1,15 @@
 import jwt from "jsonwebtoken";
 
-async function tokenValidation(token) {
-    const validation = await jwt.verify(token, process.env.SECRET_KEY);
-    return validation
+async function tokenValidationFN(token) {
+
+    try {
+        const validation = await jwt.verify(token, process.env.TOKEN_SECRET);
+        return validation
+
+    } catch (error) {
+        console.log("Token validation error -->", error);
+        return error
+    }
 }
 
-export { tokenValidation }
+export { tokenValidationFN }
